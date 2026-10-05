@@ -53,7 +53,8 @@ An end-to-end pipeline that ingests NYC 311 service requests from the NYC Open D
    python -m pip install -r requirements.txt
    ```
 
-2. Authenticate with Application Default Credentials and set your project.
+2. Authenticate with Application Default Credentials and set your project. Installation,
+   login checks, and BigQuery dataset settings are covered in [docs/gcloud.md](docs/gcloud.md).
 
    ```bash
    gcloud auth application-default login
