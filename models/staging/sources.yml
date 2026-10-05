@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: nyc311_raw
+    database: nyc311-502315
+    schema: nyc311_raw
+
+    tables:
+      - name: raw_311_requests
+        identifier: "{{ env_var('NYC311_RAW_TABLE', 'raw_311_requests') }}"

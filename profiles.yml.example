@@ -1,0 +1,11 @@
+# Copy to profiles.yml and fill in your own values. profiles.yml is gitignored.
+nyc311_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth
+      project: your-gcp-project-id
+      dataset: your_dbt_dataset
+      location: US
+      threads: 4

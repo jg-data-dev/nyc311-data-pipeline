@@ -1,0 +1,29 @@
+# Local credentials / per-user config
+.env
+*.env
+profiles.yml
+.user.yml
+.dbt/
+
+# dbt generated artifacts
+target/
+dbt_packages/
+logs/
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# Data and archives
+*.csv
+*.csv.gz
+*.parquet
+*.zip
+*.log
+
+# Editor / OS
+.vscode/
+.DS_Store
+.ipynb_checkpoints/

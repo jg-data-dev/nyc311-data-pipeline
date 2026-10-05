@@ -1,0 +1,26 @@
+name: 'nyc311_dbt'
+version: '1.0.0'
+profile: 'nyc311_dbt'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+  - "logs"
+
+models:
+  nyc311_dbt:
+    staging:
+      +materialized: table
+    core:
+      +materialized: table
+    intermediate:
+      +materialized: view
+    marts:
+      +materialized: table
