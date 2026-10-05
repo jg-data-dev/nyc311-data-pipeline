@@ -89,7 +89,10 @@ dbt test
 
 ## Run with Airflow
 
-1. Make `dags/nyc311_bigquery.py` visible in your Airflow DAGs folder (for example with a symlink).
+Full instructions (installation check, registering the DAG, logging in, triggering, and
+troubleshooting) are in [docs/airflow.md](docs/airflow.md). In short:
+
+1. Symlink `dags/nyc311_bigquery.py` into your Airflow DAGs folder.
 2. Start Airflow (`airflow standalone` for a local run).
 3. Trigger the `nyc311_backfill_bigquery` DAG with a config:
 
