@@ -1,7 +1,8 @@
 # NYC 311 Data Pipeline
 
 An end-to-end pipeline that ingests NYC 311 service requests from the NYC Open Data
-(Socrata) API into BigQuery, models them with dbt, and orchestrates the run with Airflow.
+(Socrata) API into BigQuery, models them with dbt, orchestrates the run with Airflow, and
+serves the results in a Looker Studio dashboard.
 
 ```
                     Git repository
@@ -22,7 +23,19 @@ An end-to-end pipeline that ingests NYC 311 service requests from the NYC Open D
                          ▼
                       BigQuery
         raw tables → staging tables → marts
+                         │
+                         ▼
+               Looker Studio dashboard
 ```
+
+## Dashboard
+
+The mart tables feed a [Looker Studio report](https://datastudio.google.com/reporting/2740826d-897c-4863-acbd-ad49a733e5d5)
+showing daily requests created versus closed (`fct_daily_metrics`) and the top complaint
+types by volume (`fct_borough_complaint_mix`). It reads BigQuery directly, so it reflects
+whatever date range has been loaded.
+
+![Looker Studio dashboard](docs/dashboard.png)
 
 ## Repository layout
 
@@ -104,3 +117,11 @@ troubleshooting) are in [docs/airflow.md](docs/airflow.md). In short:
    - `test: true` loads into the `raw_311_requests_probe` table instead of `raw_311_requests`.
    - `reset_probe: true` clears the probe table before loading.
    - `start_date` and `end_date` are required.
+
+## Known limitations and next steps
+
+- The ingest merges into BigQuery one 1,000-row page at a time, which is slow for long date
+  ranges. Batching into one load and one merge per day is planned.
+- dbt models are rebuilt in full on every run; incremental models are planned.
+- The DAG runs on manual trigger only; a daily schedule is planned.
+- The Google Cloud project ID is hard-coded in a few places (see Setup, step 4).
